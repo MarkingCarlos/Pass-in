@@ -1,6 +1,8 @@
 package markingcarlos.com.passin.controller;
 
 import lombok.RequiredArgsConstructor;
+import markingcarlos.com.passin.dto.attendee.AttendeRequestDTO;
+import markingcarlos.com.passin.dto.attendee.AttendeeIdDto;
 import markingcarlos.com.passin.dto.attendee.AttendeeListDTO;
 import markingcarlos.com.passin.dto.event.EventIdDTO;
 import markingcarlos.com.passin.dto.event.EventRequestDTO;
@@ -34,5 +36,13 @@ public class EventController {
         AttendeeListDTO attendeesListResponse = this.attendeeService.getEventsAttendee(id);
         return ResponseEntity.ok(attendeesListResponse);
     }
+
+    @PostMapping("/{eventId}/attendees")
+    public ResponseEntity<AttendeeIdDto> RegisterParticipantes(@PathVariable String eventId, @RequestBody AttendeRequestDTO body, UriComponentsBuilder uriComponentsBuilder){
+        AttendeeIdDto attendeeIdDto = this.eventServices.registerAttendeeOnEvent(eventId,body);
+        var uri = uriComponentsBuilder.path("/attendees//{attendeeid}/badge").buildAndExpand(attendeeIdDto.AttendeeId()).toUri();
+        return ResponseEntity.created(uri).body(attendeeIdDto);
+    }
+
 
 }
