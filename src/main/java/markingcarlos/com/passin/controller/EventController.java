@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import markingcarlos.com.passin.dto.attendee.AttendeRequestDTO;
 import markingcarlos.com.passin.dto.attendee.AttendeeIdDto;
 import markingcarlos.com.passin.dto.attendee.AttendeeListDTO;
-import markingcarlos.com.passin.dto.event.EventIdDTO;
-import markingcarlos.com.passin.dto.event.EventRequestDTO;
-import markingcarlos.com.passin.dto.event.EventResponseDTO;
+import markingcarlos.com.passin.dto.event.*;
 import markingcarlos.com.passin.services.AttendeeService;
 import markingcarlos.com.passin.services.EventServices;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +34,12 @@ public class EventController {
         AttendeeListDTO attendeesListResponse = this.attendeeService.getEventsAttendee(id);
         return ResponseEntity.ok(attendeesListResponse);
     }
+    @GetMapping("/list")
+    public ResponseEntity<EventListDTO> getEvents(){
+        EventListDTO eventListDTO = this.eventServices.getEvents();
+        return ResponseEntity.ok(eventListDTO);
+    }
+
 
     @PostMapping("/{eventId}/attendees")
     public ResponseEntity<AttendeeIdDto> RegisterParticipantes(@PathVariable String eventId, @RequestBody AttendeRequestDTO body, UriComponentsBuilder uriComponentsBuilder){

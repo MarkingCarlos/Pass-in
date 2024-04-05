@@ -29,7 +29,7 @@ SET FILES NIO TRUE
 SET FILES NIO SIZE 256
 SET FILES LOG TRUE
 SET FILES LOG SIZE 50
-SET FILES CHECK 2538
+SET FILES CHECK 7660
 SET DATABASE COLLATION "SQL_TEXT" PAD SPACE
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER SA SET LOCAL TRUE
@@ -58,12 +58,15 @@ INSERT INTO "flyway_schema_history" VALUES(1,'1','create-table-events','SQL','V1
 INSERT INTO "flyway_schema_history" VALUES(2,'2','create-table-attendees','SQL','V2__create-table-attendees.sql',-1081604347,'SA','2024-04-02 13:09:00.999339',1,'1')
 INSERT INTO "flyway_schema_history" VALUES(3,'3','create-table-checkins','SQL','V3__create-table-checkins.sql',-928566312,'SA','2024-04-02 13:09:01.008314',1,'1')
 INSERT INTO "flyway_schema_history" VALUES(4,'4','create-indexes','SQL','V4__create-indexes.sql',553901455,'SA','2024-04-02 13:09:01.016293',1,'1')
+INSERT INTO EVENTS VALUES('00f27e18-ff59-487c-abe1-317db10b26d1','semapad','Semana da pedagogia','semapad',1)
 INSERT INTO EVENTS VALUES('1923f50e-bf0c-47fe-ab99-61d95ab23ff0','Semac 2024','Semana da computa\u00e7\u00e3o','semac-2024',400)
 INSERT INTO EVENTS VALUES('a2c43c87-56bc-4a21-941a-12e11f1b38ff','Semat 2024','Semana da matematica','semat-2024',1)
 INSERT INTO ATTENDEES VALUES('11d497cb-3611-4505-abf9-dded4a8e2896','Jo\u00e3o','Silva@gmail.com','1923f50e-bf0c-47fe-ab99-61d95ab23ff0','2024-04-03 12:56:03.958216')
 INSERT INTO ATTENDEES VALUES('15d0b0d5-460d-4781-97aa-30fb3c83bf44','Carlos','carlos@gmail.com','1923f50e-bf0c-47fe-ab99-61d95ab23ff0','2024-04-03 13:11:33.247448')
 INSERT INTO ATTENDEES VALUES('1923f50e-bf0c-47fe-ab99-61d95ab23ff0','VICTOR RAPOSO','vraposo@email.com','1923f50e-bf0c-47fe-ab99-61d95ab23ff0',NULL)
 INSERT INTO ATTENDEES VALUES('3f2b3634-5186-41cf-b8b8-cd43d9594e79','Luisa','Lulu@gmail.com','a2c43c87-56bc-4a21-941a-12e11f1b38ff','2024-04-03 12:25:13.080811')
+INSERT INTO ATTENDEES VALUES('60148fad-4e32-4872-a6b3-3da8bae0676b','Carlos','Desouza@gmail.com','1923f50e-bf0c-47fe-ab99-61d95ab23ff0','2024-04-03 21:44:43.362713')
 INSERT INTO ATTENDEES VALUES('85db84b8-5fe2-4418-8a6e-b8ebc073141a','Carlos','Carlos@gmail.com','1923f50e-bf0c-47fe-ab99-61d95ab23ff0','2024-04-03 12:15:22.572913')
 INSERT INTO ATTENDEES VALUES('8ef73877-92b9-4605-b548-85651c612f39','Ana','Ana@gmail.com','1923f50e-bf0c-47fe-ab99-61d95ab23ff0','2024-04-03 12:21:12.363395')
+INSERT INTO ATTENDEES VALUES('a17fd3d5-e521-4bbc-a0e7-e48a72c0ed0f','teste','e@gmai.com','1923f50e-bf0c-47fe-ab99-61d95ab23ff0','2024-04-03 21:38:40.443888')
 INSERT INTO CHECK_INS VALUES(0,'2024-04-03 12:54:13.770901','85db84b8-5fe2-4418-8a6e-b8ebc073141a')

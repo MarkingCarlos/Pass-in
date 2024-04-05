@@ -2,20 +2,22 @@ package markingcarlos.com.passin.services;
 
 import lombok.RequiredArgsConstructor;
 import markingcarlos.com.passin.domain.attendee.Attendee;
+import markingcarlos.com.passin.domain.checkin.Checkin;
 import markingcarlos.com.passin.domain.events.Event;
 import markingcarlos.com.passin.domain.events.exceptions.EventFullException;
 import markingcarlos.com.passin.domain.events.exceptions.EventNotFoundException;
 import markingcarlos.com.passin.dto.attendee.AttendeRequestDTO;
+import markingcarlos.com.passin.dto.attendee.AttendeeDetails;
 import markingcarlos.com.passin.dto.attendee.AttendeeIdDto;
-import markingcarlos.com.passin.dto.event.EventIdDTO;
-import markingcarlos.com.passin.dto.event.EventRequestDTO;
-import markingcarlos.com.passin.dto.event.EventResponseDTO;
+import markingcarlos.com.passin.dto.attendee.AttendeeListDTO;
+import markingcarlos.com.passin.dto.event.*;
 import markingcarlos.com.passin.repositories.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -70,6 +72,21 @@ public class EventServices {
         return this.eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException("Event not found with id:"+ eventId));
 
     }
+
+    public EventListDTO getEvents(){
+            List<Event> eventList = this.getAllEvents();
+            List<EventDetailDTO> eventDetailsList = eventList.stream().map(event -> {
+            List<Attendee> attendeeList = this.attendeeService.getAllAttendee(event.getId());
+            return new EventDetailDTO(event.getId(), event.getTitle(), event.getDetails(), event.getSlug(), event.getMaximumAttendees(),attendeeList.size() );
+        }).toList();
+        return new EventListDTO(eventDetailsList);
+    }
+
+    public List<Event> getAllEvents(){
+        return this.eventRepository.findAll();
+
+    }
+
 
 
 

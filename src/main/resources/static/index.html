@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pass-in</title>
+</head>
+<body>
+    <form id="registrationForm">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="email">Eventid:</label>
+        <input type="text" id="eventId" name="email" required><br><br>
+        <button type="submit">Registrar</button>
+    </form>
+
+
+    <script>
+        // Função para enviar os dados do formulário para o endpoint
+        function registerAttendee(event) {
+            event.preventDefault(); // Evita o comportamento padrão do formulário
+
+            // Obtém os valores dos campos de entrada
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var eventId = document.getElementById('eventId').value;
+            console.log(eventId)
+
+            // Cria um objeto com os dados do participante
+            var attendeeData = {
+                "name": name,
+                "email": email
+            };
+
+            // Faz uma solicitação AJAX POST para o endpoint
+            fetch('/events/'+eventId+'/attendees', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(attendeeData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Se a solicitação for bem-sucedida, exibe os dados do participante registrado
+                    alert('Participante registrado com sucesso!: ');
+                })
+                .catch(error => {
+                    // Se ocorrer um erro, exibe uma mensagem de erro
+                    console.error('Erro ao registrar participante:', error);
+                    alert('Erro ao registrar participante. Verifique o console para mais detalhes.');
+                });
+        }
+
+        // Adiciona um ouvinte de evento para o envio do formulário
+        document.getElementById('registrationForm').addEventListener('submit', registerAttendee);
+    </script>
+</body>
+</html>
